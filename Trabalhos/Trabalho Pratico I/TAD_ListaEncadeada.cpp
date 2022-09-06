@@ -133,7 +133,7 @@ void ImprimeLista(ListaFuncionarios lista)
     system("pause");
 }
 
-int PesquisaItem(ListaFuncionarios *lista, int id)
+Apontador PesquisaItem(ListaFuncionarios *lista, int id)
 {
     Apontador aux;
     aux = lista->primeiro->prox;
@@ -141,11 +141,11 @@ int PesquisaItem(ListaFuncionarios *lista, int id)
     {
         if (aux->item.id == id)
         {
-            return aux->item.id;
+            return aux;
         }
         aux = aux->prox;
     }
-    return -1;
+    return aux;
 }
 
 void ImprimeItem(ListaFuncionarios *lista, int id)
@@ -168,6 +168,21 @@ void ImprimeItem(ListaFuncionarios *lista, int id)
         }
         aux = aux->prox;
     }
+}
+
+void ImprimeItemRecebido(Funcionario funcionario) {
+    cout << "ID: " << funcionario.id << endl;
+    cout << "Nome: " << funcionario.nome << endl;
+    cout << "Endereco: " << endl;
+    cout << funcionario.endereco.rua << "," << funcionario.endereco.numero << "," << funcionario.endereco.bairro 
+         << "," << funcionario.endereco.cidade << "," << funcionario.endereco.estado << endl;
+    cout << "Dependentes: " << funcionario.dependentes << endl << endl;
+}
+
+void ImprimeItemRecebidoComProjetos(Funcionario funcionario) {
+    ImprimeItemRecebido(funcionario);
+    cout << "Projetos" << endl;
+    imprimeLista(funcionario.projetos);
 }
 
 void RemoveListaPrimeiro(ListaFuncionarios *lista)

@@ -25,7 +25,7 @@ int main() {
                 incluirFuncionario(&listaFuncionarios, &idFuncionario, &idProjeto);
             break;
             case 2:
-                incluirProjetos();
+                incluirProjetosEmFuncionario(&listaFuncionarios, &idProjeto);
             break;
             case 3:
                 excluirProjetos();

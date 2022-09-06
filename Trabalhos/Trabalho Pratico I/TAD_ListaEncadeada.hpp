@@ -17,7 +17,7 @@ void InsereListaAposElemento(ListaFuncionarios *lista, Funcionario *item, int id
 void InsereListaUltimo(ListaFuncionarios *lista, Funcionario *item);
 void AtualizaUltimo(ListaFuncionarios *lista);
 void ImprimeLista(ListaFuncionarios lista);
-int PesquisaItem(ListaFuncionarios *lista, int chave);
+Apontador PesquisaItem(ListaFuncionarios *lista, int id);
 void ImprimeItem(ListaFuncionarios *lista, int id);
 void RemoveListaPrimeiro(ListaFuncionarios *lista);
 void RemoveListaUltimo(ListaFuncionarios *lista);

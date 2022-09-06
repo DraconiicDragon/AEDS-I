@@ -72,3 +72,9 @@ void imprimeLista(ListaProjetos lista) {
         cout << endl;
     }
 }
+
+void imprimeItem(Projeto projeto) {
+    cout << "ID: " << projeto.id << endl;
+    cout << "Nome: " << projeto.nome << endl;
+    cout << "Horas Semanais: " << projeto.horasSemanais << endl << endl;
+}
