@@ -243,6 +243,22 @@ void RemoveItemPorId(ListaFuncionarios *lista, int id)
     lista->tamanho--;
 }
 
+int RemoveFuncionariosSemProjetos(ListaFuncionarios *lista) {
+    Apontador aux;
+    int i = 0;
+    aux = lista->primeiro->prox;
+    while (aux != NULL)
+    {
+        if (aux->item.projetos.tamanho == 0)
+        {
+            RemoveItemPorId(lista, aux->item.id);
+            i++;
+        }
+        aux = aux->prox;
+    }
+    return i;
+}
+
 void DesalocaLista(ListaFuncionarios *lista) {
     Apontador aux, excluido;
     aux = lista->primeiro->prox;

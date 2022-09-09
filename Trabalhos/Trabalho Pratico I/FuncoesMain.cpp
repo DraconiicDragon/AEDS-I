@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <fstream>
 #include "TAD_ListaEncadeada.hpp"
 
 using namespace std;
@@ -8,6 +9,8 @@ void imprimirMenu() {
     cout << "Menu" << endl;
     cout << "1 - Incluir Novo Funcionario" << endl;
     cout << "2 - Incluir Projetos Em Funcionario" << endl;
+    cout << "3 - Excluir Projetos De Um Funcionario" << endl;
+    cout << "4 - Excluir Funcionarios Sem Projetos" << endl;
     cout << "5 - Consulta Funcionario" << endl;
     cout << "7 - Sair" << endl;
 }
@@ -144,19 +147,85 @@ void incluirProjetosEmFuncionario(ListaFuncionarios *listaFuncionarios, int *idP
     cout << "Voltando ao menu principal" << endl;
 }
 
-void excluirProjetos() {
+void excluirProjetos(ListaFuncionarios *listaFuncionarios) {
+    int id;
+    char opcao;
 
+    cout << "Digite o ID do funcionario: ";
+    cin >> id;
+
+    Apontador funcionario = PesquisaItem(listaFuncionarios, id);
+
+    if(funcionario == NULL) {
+        
+        cout << "O ID informado nao corresponde a nenhum funcionario cadastrado." << endl;
+        system("cls");
+
+    } else {
+
+        do {
+                
+            ImprimeItemRecebidoComProjetos(funcionario->item);
+
+            cout << "Deseja apagar projetos desse funcionario?(s/n): ";
+            cin >> opcao;
+            system("cls");
+
+        } while(opcao != 'n' && opcao != 's');
+        
+    }
+    
+    if(funcionario->item.projetos.tamanho == 0) {
+
+        cout << "Esse funcionario nao possui nenhum projeto cadastrado" << endl;
+
+    } else {
+         if(opcao == 's') {
+
+            cout << "Digite o ID do projeto a ser apagado: ";
+            cin >> id;
+            int posicao = localizaItem(&funcionario->item.projetos, id);
+
+            do {
+
+                imprimeItem(funcionario->item.projetos.projeto[posicao]);
+                cout << "Deseja deletar esse projeto?(s/n): ";
+                cin >> opcao;
+                system("cls");
+
+            } while(opcao != 'n' && opcao != 's');
+
+            if(opcao == 's') {
+                removeItem(&funcionario->item.projetos, id);
+            }
+        }
+    }
+    
 }
 
-void excluirFuncionarios() {
+void excluirFuncionarios(ListaFuncionarios *listaFuncionarios) {
+    char opcao;
 
+    cout << "Deseja remover todos os funcionarios sem projetos cadastrados?(s/n): ";
+    cin >> opcao;
+
+    if(opcao == 's') {
+        int i = RemoveFuncionariosSemProjetos(listaFuncionarios);
+        cout << "Foram removidos " << i << " funcionarios." << endl;
+    }
 }
 
 void consultaFuncionario(ListaFuncionarios *listaFuncionarios) {
     int id;
     cout << "Digite o ID do funcionario: ";
     cin >> id;
-    ImprimeItem(listaFuncionarios, id);
+    Apontador funcionario = PesquisaItem(listaFuncionarios ,id);
+    system("cls");
+    if(funcionario == NULL) {
+        cout << "O ID informado nao corresponde a nenhum funcionario cadastrado." << endl;
+    } else {
+        ImprimeItemRecebidoComProjetos(funcionario->item);
+    }
 }
 
 void imprimirContraCheque() {

@@ -28,10 +28,10 @@ int main() {
                 incluirProjetosEmFuncionario(&listaFuncionarios, &idProjeto);
             break;
             case 3:
-                excluirProjetos();
+                excluirProjetos(&listaFuncionarios);
             break;
             case 4:
-                excluirFuncionarios();
+                excluirFuncionarios(&listaFuncionarios);
             break;
             case 5:
                 consultaFuncionario(&listaFuncionarios);
