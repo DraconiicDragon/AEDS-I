@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string.h>
-#include <fstream>
 #include "TAD_ListaEncadeada.hpp"
 
 using namespace std;
@@ -12,6 +11,7 @@ void imprimirMenu() {
     cout << "3 - Excluir Projetos De Um Funcionario" << endl;
     cout << "4 - Excluir Funcionarios Sem Projetos" << endl;
     cout << "5 - Consulta Funcionario" << endl;
+    cout << "6 - Imprimir Contra Cheque" << endl;
     cout << "7 - Sair" << endl;
 }
 
@@ -100,7 +100,7 @@ void incluirFuncionario(ListaFuncionarios *listaFuncionarios, int *idFuncionario
 
     funcionario.projetos = listaProjetos;
     InsereListaUltimo(listaFuncionarios, &funcionario);
-    ImprimeItem(listaFuncionarios, *idFuncionario);
+    ImprimeItemRecebidoComProjetos(funcionario);
     *idFuncionario += 1;
 }
 
@@ -204,14 +204,59 @@ void excluirProjetos(ListaFuncionarios *listaFuncionarios) {
 }
 
 void excluirFuncionarios(ListaFuncionarios *listaFuncionarios) {
+    
+    cout << "-----Exclusao de Funcionarios-----" << endl;
+    cout << "1 - Excluir todos os funcionarios" << endl;
+    cout << "2 - Excluir um unico funcionario" << endl;
+    cout << "3 - Voltar para o menu principal" << endl;
+    
     char opcao;
-
-    cout << "Deseja remover todos os funcionarios sem projetos cadastrados?(s/n): ";
+    cout << "Escolha uma opcao: ";
     cin >> opcao;
 
-    if(opcao == 's') {
-        int i = RemoveFuncionariosSemProjetos(listaFuncionarios);
-        cout << "Foram removidos " << i << " funcionarios." << endl;
+    switch(opcao) {
+        case 1:
+
+            do {
+                cout << "Deseja remover todos os funcionarios sem projetos cadastrados?(s/n): ";
+                cin >> opcao;
+                system("cls");
+            } while(opcao != 'n' && opcao != 's');
+
+            if(opcao == 's') {
+                int i = RemoveFuncionariosSemProjetos(listaFuncionarios);
+                cout << "Foram removidos " << i << " funcionario(s)." << endl;
+            }  
+        break;
+
+        case 2:
+
+            int id;
+            cout << "Digite o ID do funcionario: ";
+            cin >> id;
+            system("cls");
+
+            Apontador funcionario = PesquisaItem(listaFuncionarios ,id);
+            
+            if(funcionario == NULL) {
+
+                cout << "O ID informado nao corresponde a nenhum funcionario cadastrado." << endl;
+
+            } else {
+
+                if(funcionario->item.projetos.tamanho != 0) {
+
+                    cout << "Esse funcionario possui projetos cadastrados, por isso nao pode ser excluido!" << endl;
+
+                } else {
+
+                    ImprimeItemRecebido(funcionario->item);
+                    RemoveItemPorId(listaFuncionarios, id);
+                    cout << "Funcionario removido com sucesso" << endl;
+
+                }
+            }
+        break;
     }
 }
 
@@ -228,6 +273,38 @@ void consultaFuncionario(ListaFuncionarios *listaFuncionarios) {
     }
 }
 
-void imprimirContraCheque() {
+void imprimirContraCheque(ListaFuncionarios *listaFuncionarios) {
+    cout << "------Contra Cheque------" << endl;
+    cout << "1 - Todos os funcionarios" << endl;
+    cout << "2 - Um unico funcionario" << endl;
 
+    int opcao;
+    cin >> opcao;
+    system("cls");
+
+    Apontador aux;
+    switch(opcao) {
+        case 1:
+
+            aux = listaFuncionarios->primeiro->prox;
+            while(aux != NULL) {
+                ImprimeContraCheque(aux->item);
+                aux = aux->prox;
+            }      
+
+        break;
+        case 2:
+
+            cout << "Digite o ID do funcionario: ";
+            cin >> opcao;
+            system("cls");
+
+            aux = PesquisaItem(listaFuncionarios, opcao);
+            if(aux == NULL) {
+                cout << "O ID informado nao corresponde a nenhum funcionario cadastrado." << endl;
+            } else {
+                ImprimeContraCheque(aux->item);
+            }
+        break;
+    }
 }

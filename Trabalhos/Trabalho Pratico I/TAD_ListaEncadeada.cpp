@@ -148,32 +148,10 @@ Apontador PesquisaItem(ListaFuncionarios *lista, int id)
     return aux;
 }
 
-void ImprimeItem(ListaFuncionarios *lista, int id)
-{
-    Apontador aux;
-    aux = lista->primeiro->prox;
-    while (aux != NULL)
-    {
-        if (aux->item.id == id)
-        {
-            cout << "ID: " << aux->item.id << endl;
-            cout << "Nome: " << aux->item.nome << endl;
-            cout << "Endereco: " << endl;
-            cout << aux->item.endereco.rua << "," << aux->item.endereco.numero << "," << aux->item.endereco.bairro 
-                 << "," << aux->item.endereco.cidade << "," << aux->item.endereco.estado << endl;
-            cout << "Dependentes: " << aux->item.dependentes << endl << endl;
-            cout << "Projetos" << endl;
-            imprimeLista(aux->item.projetos);
-            break;
-        }
-        aux = aux->prox;
-    }
-}
-
 void ImprimeItemRecebido(Funcionario funcionario) {
     cout << "ID: " << funcionario.id << endl;
     cout << "Nome: " << funcionario.nome << endl;
-    cout << "Endereco: " << endl;
+    cout << "Endereco: ";
     cout << funcionario.endereco.rua << "," << funcionario.endereco.numero << "," << funcionario.endereco.bairro 
          << "," << funcionario.endereco.cidade << "," << funcionario.endereco.estado << endl;
     cout << "Dependentes: " << funcionario.dependentes << endl << endl;
@@ -183,6 +161,26 @@ void ImprimeItemRecebidoComProjetos(Funcionario funcionario) {
     ImprimeItemRecebido(funcionario);
     cout << "Projetos" << endl;
     imprimeLista(funcionario.projetos);
+}
+
+void ImprimeContraCheque(Funcionario funcionario) {
+    float horasSemanais = 0;
+    for(int i = 0; i < funcionario.projetos.tamanho; i++) {
+        horasSemanais += funcionario.projetos.projeto[i].horasSemanais;
+    }
+    float salarioBruto, inss, ir, salarioLiquido;
+    salarioBruto = (45 * horasSemanais) + (35 * funcionario.dependentes);
+    inss = 0.085 * salarioBruto;
+    ir = 0.15 * salarioBruto;
+    salarioLiquido = salarioBruto - inss - ir;
+
+    cout << "ID: " << funcionario.id << endl;
+    cout << "Nome: " << funcionario.nome << endl;
+    cout << "Horas Semanais: " << horasSemanais << endl;
+    cout << "Salario Bruto: R$ " << salarioBruto << endl;
+    cout << "INSS: R$ " << inss << endl;
+    cout << "IR: R$ " << ir << endl;
+    cout << "Salario Liquido: R$ " << salarioLiquido << endl << endl;
 }
 
 void RemoveListaPrimeiro(ListaFuncionarios *lista)
