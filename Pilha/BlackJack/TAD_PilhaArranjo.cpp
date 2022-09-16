@@ -1,14 +1,16 @@
-#define MAX_TAM 30
+#define MAX_TAM 52
+
 #include <iostream>
 
 using namespace std;
 
-struct Item {
-    char letra;
+struct Carta {
+    int naipe;
+    int valor;
 };
 
 struct Pilha {
-    Item item[MAX_TAM];
+    Carta Carta[MAX_TAM];
     int tamanho;
 };
 
@@ -34,28 +36,28 @@ bool verificaPilhaCheia(Pilha* pilha) {
     return false;
 }
 
-bool empilha(Pilha* pilha, Item item) {
+bool empilha(Pilha* pilha, Carta Carta) {
     if(verificaPilhaCheia(pilha)) {
         return false;
     }
-    pilha->item[pilha->tamanho] = item;
+    pilha->Carta[pilha->tamanho] = Carta;
     pilha->tamanho++;
     return true;
 }
 
-Item desempilha(Pilha* pilha) {
-    Item item;
-    item = pilha->item[pilha->tamanho - 1];
-    pilha->item[pilha->tamanho - 1] = pilha->item[pilha->tamanho];
+Carta desempilha(Pilha* pilha) {
+    Carta Carta;
+    Carta = pilha->Carta[pilha->tamanho - 1];
+    pilha->Carta[pilha->tamanho - 1] = pilha->Carta[pilha->tamanho];
     pilha->tamanho--;
-    return item;
+    return Carta;
 }
 
 void imprimePilha(Pilha pilha) {
     for(int i = 0; i < pilha.tamanho; i++) {
-        cout << pilha.item[i].letra;
+        cout << pilha.Carta[i].naipe << " ";
+        cout << pilha.Carta[i].valor << endl;
     }
-    cout << endl;
 }
 
 int getTamanho(Pilha* pilha) {
