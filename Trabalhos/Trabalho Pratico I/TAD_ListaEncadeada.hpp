@@ -12,16 +12,23 @@ typedef struct ListaFuncionarios;
 
 void CriaListaVazia(ListaFuncionarios *lista);
 bool VerificaListaVazia(ListaFuncionarios *lista);
+int TamanhoLista(ListaFuncionarios *lista);
+void AtualizaUltimo(ListaFuncionarios *lista);
+
 void InsereListaPrimeiro(ListaFuncionarios *lista, Funcionario *item);
 void InsereListaAposElemento(ListaFuncionarios *lista, Funcionario *item, int id);
 void InsereListaUltimo(ListaFuncionarios *lista, Funcionario *item);
-void AtualizaUltimo(ListaFuncionarios *lista);
+
 void ImprimeLista(ListaFuncionarios lista);
 Apontador PesquisaItem(ListaFuncionarios *lista, int id);
+void ImprimeItemRecebido(Funcionario funcionario);
+void ImprimeItemRecebidoComProjetos(Funcionario funcionario);
+void ImprimeContraCheque(Funcionario funcionario);
+
 void RemoveListaPrimeiro(ListaFuncionarios *lista);
 void RemoveListaUltimo(ListaFuncionarios *lista);
 void RemoveItemPorId(ListaFuncionarios *lista, int id);
-int TamanhoLista(ListaFuncionarios *lista);
+int RemoveFuncionariosSemProjetos(ListaFuncionarios *lista);
 void DesalocaLista(ListaFuncionarios *lista);
 
 #endif

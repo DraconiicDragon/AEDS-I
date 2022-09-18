@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 
 #include "FuncoesMain.hpp"
 
@@ -8,63 +7,16 @@ using namespace std;
 int main() {
 
     ListaFuncionarios listaFuncionarios;
-    if(!listaCriada) {
-        CriaListaVazia(&listaFuncionarios);
-    }
+    CriaListaVazia(&listaFuncionarios);
 
-    int opcao;
-    int idFuncionario = 0;
-    int idProjeto = 0;
-  
-    ifstream arqEntrada("funcionarios.bin");
-
-    if(arqEntrada.is_open()) {
-        char indicador;
-        arqEntrada.get(indicador);
-        while(indicador == '$') {
-            Funcionario funcionario;
-            arqEntrada >> funcionario.id;
-            arqEntrada.get();
-            arqEntrada.getline(funcionario.nome, 50);
-            arqEntrada.getline(funcionario.endereco.numero, 10);
-            arqEntrada.getline(funcionario.endereco.rua, 50);
-            arqEntrada.getline(funcionario.endereco.bairro, 50);
-            arqEntrada.getline(funcionario.endereco.cidade, 50);
-            arqEntrada.getline(funcionario.endereco.estado, 50);
-            arqEntrada >> funcionario.dependentes;
-            arqEntrada.get();
-
-            if(funcionario.id > idFuncionario) {
-                idFuncionario = funcionario.id;
-            }
-
-            ListaProjetos listaProjetos;
-            criaListaVazia(&listaProjetos);
-
-            arqEntrada.get(indicador);
-
-            while(indicador == '?') {
-                Projeto projeto;
-                arqEntrada >> projeto.id;
-                arqEntrada.get();
-                arqEntrada.getline(projeto.nome, 50);
-                arqEntrada >> projeto.horasSemanais;
-                arqEntrada.get(indicador);
-                insereItem(&listaProjetos, projeto);
-
-                if(projeto.id > idProjeto) {
-                    idProjeto = projeto.id;
-                }
-                arqEntrada.get(indicador);
-            }
-            funcionario.projetos = listaProjetos;
-            InsereListaUltimo(&listaFuncionarios, &funcionario);
-        }
-    }
+    int idFuncionario = 0; // Variável para o controle automático dos IDs.
+    int idProjeto = 0;     // Variável para o controle automático dos IDs.
+    lerArquivo(&listaFuncionarios, &idFuncionario, &idProjeto);
 
     idFuncionario++;
     idProjeto++;
    
+    int opcao;
     do {
         imprimirMenu();
         cout << "Digite sua escolha: ";
@@ -90,35 +42,18 @@ int main() {
             case 6:
                 imprimirContraCheque(&listaFuncionarios);
             break;
+            case 7:
+                imprimirTodosFuncionarios(&listaFuncionarios);
+            break;
         }
 
         system("pause");
         system("cls");
 
-    } while(opcao != 7);
+    } while(opcao != 8);
 
-    ofstream arqSaida("funcionarios.bin");
-    Apontador aux;
-    aux = listaFuncionarios.primeiro->prox;
-    while(aux != NULL) {
-        arqSaida << "$" << endl;
-        arqSaida << aux->item.id << endl;
-        arqSaida << aux->item.nome << endl;
-        arqSaida << aux->item.endereco.numero << endl;
-        arqSaida << aux->item.endereco.rua << endl;
-        arqSaida << aux->item.endereco.bairro << endl;
-        arqSaida << aux->item.endereco.cidade << endl;
-        arqSaida << aux->item.endereco.estado << endl;
-        arqSaida << aux->item.dependentes << endl;
-        for(int i = 0; i < aux->item.projetos.tamanho; i++) {
-            arqSaida << "?" << endl;
-            arqSaida << aux->item.projetos.projeto[i].id << endl;
-            arqSaida << aux->item.projetos.projeto[i].nome << endl;
-            arqSaida << aux->item.projetos.projeto[i].horasSemanais << endl;
-        }
-        aux = aux->prox;
-    }
-
+    salvarArquivo(&listaFuncionarios);
     DesalocaLista(&listaFuncionarios);
+
     return 0;
 }

@@ -149,17 +149,18 @@ Apontador PesquisaItem(ListaFuncionarios *lista, int id)
 }
 
 void ImprimeItemRecebido(Funcionario funcionario) {
+    cout << "\tInformacoes do Funcionario" << endl;
     cout << "ID: " << funcionario.id << endl;
     cout << "Nome: " << funcionario.nome << endl;
-    cout << "Endereco: ";
-    cout << funcionario.endereco.rua << "," << funcionario.endereco.numero << "," << funcionario.endereco.bairro 
-         << "," << funcionario.endereco.cidade << "," << funcionario.endereco.estado << endl;
+    cout << "Endereco: Rua ";
+    cout << funcionario.endereco.rua << ", " << funcionario.endereco.numero << ", " << funcionario.endereco.bairro 
+         << ", " << funcionario.endereco.cidade << " / " << funcionario.endereco.estado << endl;
     cout << "Dependentes: " << funcionario.dependentes << endl << endl;
 }
 
 void ImprimeItemRecebidoComProjetos(Funcionario funcionario) {
     ImprimeItemRecebido(funcionario);
-    cout << "Projetos" << endl;
+    cout << "\tProjetos" << endl;
     imprimeLista(funcionario.projetos);
 }
 

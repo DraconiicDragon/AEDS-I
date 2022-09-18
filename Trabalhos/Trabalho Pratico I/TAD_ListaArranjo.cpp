@@ -66,9 +66,9 @@ void removeItem(ListaProjetos *lista, int id) {
 // Adaptar "cout << chave" para cada projeto 
 void imprimeLista(ListaProjetos lista) {
     for(int i = 0; i < lista.tamanho; i++) {
-        cout << lista.projeto[i].id << endl;
-        cout << lista.projeto[i].nome << endl;
-        cout << lista.projeto[i].horasSemanais << endl;
+        cout << "ID do Projeto: " << lista.projeto[i].id << endl;
+        cout << "Nome do Projeto: " << lista.projeto[i].nome << endl;
+        cout << "Horas Semanais: " << lista.projeto[i].horasSemanais << endl;
         cout << endl;
     }
 }
