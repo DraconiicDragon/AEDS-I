@@ -125,6 +125,7 @@ void imprimirMenu() {
     cout << " 6 - Imprimir Contra Cheque" << endl;
     cout << " 7 - Imprimir Todos Funcionarios" << endl;
     cout << " 8 - Sair" << endl;
+    cout << "Digite sua escolha: ";
 }
 
 // Função chamada na hora de incluir novos projetos em um funcionário, 

@@ -169,6 +169,7 @@ void ImprimeContraCheque(Funcionario funcionario) {
     for(int i = 0; i < funcionario.projetos.tamanho; i++) {
         horasSemanais += funcionario.projetos.projeto[i].horasSemanais;
     }
+    
     float salarioBruto, inss, ir, salarioLiquido;
     salarioBruto = (45 * horasSemanais) + (35 * funcionario.dependentes);
     inss = 0.085 * salarioBruto;

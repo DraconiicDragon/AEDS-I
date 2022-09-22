@@ -19,7 +19,6 @@ int main() {
     int opcao;
     do {
         imprimirMenu();
-        cout << "Digite sua escolha: ";
         cin >> opcao;
         system("cls");
 
