@@ -23,61 +23,6 @@ void lerArquivo(ListaFuncionarios* listaFuncionarios, int* idFuncionario, int* i
             InsereListaUltimo(listaFuncionarios, &funcionario);
         }
     }
-
-    // Modo de ler o arquivo que eu fiz antes de descobrir sobre a função.
-
-    // ifstream arqEntrada("funcionarios.bin");
-    // if(!arqEntrada.is_open()) {
-    //     return;
-    // } else {
-    //     char indicador;
-    //     arqEntrada.get(indicador);
-
-    //     while(indicador == '$') {
-
-    //         Funcionario funcionario;
-    //         arqEntrada >> funcionario.id;
-    //         arqEntrada.get();
-    //         arqEntrada.getline(funcionario.nome, 50);
-    //         arqEntrada.getline(funcionario.endereco.numero, 10);
-    //         arqEntrada.getline(funcionario.endereco.rua, 50);
-    //         arqEntrada.getline(funcionario.endereco.bairro, 50);
-    //         arqEntrada.getline(funcionario.endereco.cidade, 50);
-    //         arqEntrada.getline(funcionario.endereco.estado, 50);
-    //         arqEntrada >> funcionario.dependentes;
-    //         arqEntrada.get();
-
-    //         if(funcionario.id > *idFuncionario) {
-    //             *idFuncionario = funcionario.id;
-    //         }
-
-    //         ListaProjetos listaProjetos;
-    //         criaListaVazia(&listaProjetos);
-
-    //         arqEntrada.get(indicador);
-
-    //         while(indicador == '?') {
-
-    //             Projeto projeto;
-    //             arqEntrada >> projeto.id;
-    //             arqEntrada.get();
-    //             arqEntrada.getline(projeto.nome, 50);
-    //             arqEntrada >> projeto.horasSemanais;
-    //             arqEntrada.get(indicador);
-    //             insereItem(&listaProjetos, projeto);
-
-    //             if(projeto.id > *idProjeto) {
-    //                 *idProjeto = projeto.id;
-    //             }
-
-    //             arqEntrada.get(indicador);
-    //         }
-
-    //         funcionario.projetos = listaProjetos;
-    //         InsereListaUltimo(listaFuncionarios, &funcionario);
-
-    //     }
-    // }
 }
 
 // Salva todos os funcionários presentes na lista no arquivo "funcionarios.bin".
@@ -88,34 +33,6 @@ void salvarArquivo(ListaFuncionarios* listaFuncionarios) {
         fwrite(&aux->item, sizeof(Funcionario), 1, file);
         aux = aux->prox;
     }
-    
-    // Modo de salvar arquivo que eu fiz antes de descobrir sobre a função.
-
-    // ofstream arqSaida("funcionarios.bin");
-
-    // Apontador aux;
-    // aux = listaFuncionarios->primeiro->prox;
-
-    // while(aux != NULL) {
-
-    //     arqSaida << "$" << endl;
-    //     arqSaida << aux->item.id << endl;
-    //     arqSaida << aux->item.nome << endl;
-    //     arqSaida << aux->item.endereco.numero << endl;
-    //     arqSaida << aux->item.endereco.rua << endl;
-    //     arqSaida << aux->item.endereco.bairro << endl;
-    //     arqSaida << aux->item.endereco.cidade << endl;
-    //     arqSaida << aux->item.endereco.estado << endl;
-    //     arqSaida << aux->item.dependentes << endl;
-
-    //     for(int i = 0; i < aux->item.projetos.tamanho; i++) {
-    //         arqSaida << "?" << endl;
-    //         arqSaida << aux->item.projetos.projeto[i].id << endl;
-    //         arqSaida << aux->item.projetos.projeto[i].nome << endl;
-    //         arqSaida << aux->item.projetos.projeto[i].horasSemanais << endl;
-    //     }
-    //     aux = aux->prox;
-    // }
 }
 
 // Imprime o menu principal.
@@ -153,10 +70,12 @@ void incluirProjetos(ListaProjetos *listaProjetos, int *idProjeto) {
 
                 system("cls");
                 do {
+
                     imprimeItem(projeto);
                     cout << "As informacoes desse projeto estao corretas?(s/n): ";
                     cin >> opcao;
                     system("cls");
+
                 } while(opcao != 'n' && opcao != 's');
 
             } while(opcao == 'n');
@@ -165,11 +84,13 @@ void incluirProjetos(ListaProjetos *listaProjetos, int *idProjeto) {
             *idProjeto += 1;
 
             if(listaProjetos->tamanho < 5) {
+
                 do {
                     cout << "Deseja incluir mais um projeto?(s/n): ";
                     cin >> opcao;
                     system("cls");
                 } while(opcao != 'n' && opcao != 's');
+
             }
 
         } while(opcao == 's' && listaProjetos->tamanho < 5);
@@ -207,6 +128,7 @@ void incluirFuncionario(ListaFuncionarios *listaFuncionarios, int *idFuncionario
             // strcpy(funcionario.endereco.estado, "Estado");
             // funcionario.dependentes = 4;
         // TEMP
+        
         system("cls");
         do {
             ImprimeItemRecebido(funcionario);
