@@ -24,6 +24,8 @@ void lerArquivo(ListaFuncionarios* listaFuncionarios, int* idFuncionario, int* i
         }
     }
 
+    // Modo de ler o arquivo que eu fiz antes de descobrir sobre a função.
+
     // ifstream arqEntrada("funcionarios.bin");
     // if(!arqEntrada.is_open()) {
     //     return;
@@ -87,6 +89,8 @@ void salvarArquivo(ListaFuncionarios* listaFuncionarios) {
         aux = aux->prox;
     }
     
+    // Modo de salvar arquivo que eu fiz antes de descobrir sobre a função.
+
     // ofstream arqSaida("funcionarios.bin");
 
     // Apontador aux;

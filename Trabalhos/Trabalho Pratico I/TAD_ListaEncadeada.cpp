@@ -55,7 +55,7 @@ int TamanhoLista(ListaFuncionarios *lista)
 void AtualizaUltimo(ListaFuncionarios *lista)
 {
     Apontador aux;
-    aux = lista->primeiro->prox;
+    aux = lista->primeiro;
     while (aux->prox != NULL)
     {
         aux = aux->prox;
@@ -241,6 +241,7 @@ void RemoveItemPorId(ListaFuncionarios *lista, int id)
     anterior->prox = aux->prox;
     delete aux;
     lista->tamanho--;
+    AtualizaUltimo(lista);
 }
 
 int RemoveFuncionariosSemProjetos(ListaFuncionarios *lista) {
