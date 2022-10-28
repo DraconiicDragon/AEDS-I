@@ -6,6 +6,7 @@ namespace FilaPonteiro {
 
 struct Item {
     int id;
+    int prioridade;
 };
 
 typedef struct Elemento* Apontador;
@@ -23,9 +24,12 @@ struct Fila {
 
 void criaFilaVazia(Fila* fila);
 bool verificaFilaVazia(Fila* fila);
+
 void insereItem(Fila* fila, Item item);
+
 Item retiraItem(Fila* fila);
 void esvaziaFila(Fila* fila);
+
 void imprimeItem(Item item);
 void imprimeFila(Fila* fila);
 

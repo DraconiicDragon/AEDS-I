@@ -31,9 +31,11 @@ void FilaPonteiro::insereItem(Fila* fila, Item item) {
 FilaPonteiro::Item FilaPonteiro::retiraItem(Fila* fila) {
     Item aux;
     aux.id = -1;
+
     if(verificaFilaVazia(fila)) {
         return aux;
     }
+
     aux = fila->primeiro->item;
     Apontador deletado = fila->primeiro;
 
