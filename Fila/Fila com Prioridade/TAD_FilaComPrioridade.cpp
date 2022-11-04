@@ -40,6 +40,7 @@ void FilaPrioridade::insereItemPrimeiro(Fila* fila, Item item) {
 
     if(verificaFilaVazia(fila)) {
         fila->primeiro = aux;
+        fila->ultimo = fila->primeiro;
     } else {
         aux->prox = fila->primeiro;
         fila->primeiro = aux;
@@ -53,31 +54,37 @@ void FilaPrioridade::insereAposElemento(Apontador anterior, Apontador novo) {
     anterior->prox = novo;
 }
 
-// Insere o item baseado em sua prioridade, prioridades maiores são inseridas primeiro na fila.
+// Insere o item baseado em sua prioridade, prioridades menores são inseridas primeiro na fila.
 void FilaPrioridade::insereItemPrioridade(Fila* fila, Item item) {
     if(verificaFilaVazia(fila)) {
         insereItemPrimeiro(fila, item);
         return;
     }
 
-    Apontador anterior = fila->primeiro;
-
-    if(item.prioridade > anterior->item.prioridade) {
+    if(item.prioridade < fila->primeiro->item.prioridade) {
         insereItemPrimeiro(fila, item);
         return;
     }
 
+    Apontador anterior = fila->primeiro;
     Apontador atual = anterior->prox;
+
     Apontador novo = new Elemento;
     novo->item = item;
+    novo->prox = NULL;
 
+    
     while(atual != NULL) {
-        if(novo->item.prioridade > atual->item.prioridade) {
+        if(novo->item.prioridade < atual->item.prioridade) {
             insereAposElemento(anterior, novo);
+            return;
         }
         anterior = atual;
         atual = atual->prox;
+        
     }
+    insereAposElemento(fila->ultimo, novo);
+    fila->ultimo = novo;
 }
 
 // Retira o primeiro item da fila e o retorna.
