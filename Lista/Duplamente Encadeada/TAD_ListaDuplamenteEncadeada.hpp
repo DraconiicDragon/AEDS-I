@@ -22,6 +22,7 @@ namespace listaDuplamenteEncadeada {
         int tamanho;
 
         void criaListaVazia();
+        bool listaVazia();
 
         void insereItemUltimo(Item item);
         void insereItemPrimeiro(Item item);
@@ -33,6 +34,7 @@ namespace listaDuplamenteEncadeada {
 
         void imprimeItem(Item item);
         void imprimeLista();
+        void imprimeListaReversa();
 
     };
 

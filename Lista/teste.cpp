@@ -9,20 +9,25 @@ int main() {
     Lista lista;
     lista.criaListaVazia();
     Item item;
-    item.id = 1;
+    item.id = 2;
+    lista.insereItemUltimo(item);
+
+    item.id = 4;
     lista.insereItemUltimo(item);
 
     item.id = 3;
-    lista.insereItemUltimo(item);
+    lista.insereItemAposElemento(item, 2);
 
-    item.id = 2;
-    lista.insereItemAposElemento(item, 1);
-
-    item.id = 4;
+    item.id = 1;
     lista.insereItemPrimeiro(item);
-        
+
     lista.retiraItemPorId(2);
+    
+    cout << endl << "Normal" << endl;
     lista.imprimeLista();
+
+    cout << endl << "Reverso" << endl;
+    lista.imprimeListaReversa();
 
     return 0;
 }

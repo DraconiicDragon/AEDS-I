@@ -8,6 +8,13 @@ void listaDuplamenteEncadeada::Lista::criaListaVazia() {
     tamanho = 0;
 }
 
+bool listaDuplamenteEncadeada::Lista::listaVazia() {
+    if(tamanho == 0 && ultimo == primeiro) {
+        return true;
+    }
+    return false;
+}
+
 void listaDuplamenteEncadeada::Lista::insereItemUltimo(Item item) {
     ultimo->prox = new Elemento;
     ultimo->prox->ante = ultimo;
@@ -23,6 +30,7 @@ void listaDuplamenteEncadeada::Lista::insereItemPrimeiro(Item item) {
 
     inserido->prox = primeiro->prox;
     inserido->ante = primeiro;
+    primeiro->prox->ante = inserido;
     primeiro->prox = inserido;
     tamanho++;
 }
@@ -65,10 +73,14 @@ listaDuplamenteEncadeada::Item listaDuplamenteEncadeada::Lista::retiraItemPorId(
     Item retorno;
     retorno.id = -1;
 
+    if(listaVazia()) {
+        return retorno;
+    }
     Apontador atual = localizaItemPorId(id);
+    
     if(atual != NULL) {
         // Atualiza o proximo do anterior.
-        atual->ante->prox = atual->prox;
+        atual->ante->prox = atual->prox;     
 
         // Caso o item removido seja o ultimo, atualiza o ultimo para o antecessor do removido.
         if(atual == ultimo) {
@@ -103,4 +115,12 @@ void listaDuplamenteEncadeada::Lista::imprimeLista() {
         imprimeItem(aux->item);
         aux = aux->prox;
     }
+}
+
+void listaDuplamenteEncadeada::Lista::imprimeListaReversa() {
+    Apontador aux = ultimo;
+    while(aux != primeiro) {
+        imprimeItem(aux->item);
+        aux = aux->ante;
+    } 
 }
