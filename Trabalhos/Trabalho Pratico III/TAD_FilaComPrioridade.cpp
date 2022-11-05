@@ -15,10 +15,10 @@ bool FilaPrioridade::filaVazia(Fila* fila) {
     return false;
 }
 
-// Insere o item no final da fila.
-void FilaPrioridade::insereItemUltimo(Fila* fila, Item item) {
+// Insere o Paciente no final da fila.
+void FilaPrioridade::inserePacienteUltimo(Fila* fila, Paciente Paciente) {
     Apontador aux = new Elemento;
-    aux->item = item;
+    aux->paciente = Paciente;
     aux->prox = NULL;
 
     if(filaVazia(fila)) {
@@ -31,11 +31,11 @@ void FilaPrioridade::insereItemUltimo(Fila* fila, Item item) {
     fila->tamanho++;
 }
 
-// Insere o item no começo da fila, usado na função insere com prioridade.
-void FilaPrioridade::insereItemPrimeiro(Fila* fila, Item item) {
+// Insere o Paciente no começo da fila, usado na função insere com prioridade.
+void FilaPrioridade::inserePacientePrimeiro(Fila* fila, Paciente Paciente) {
 
     Apontador aux = new Elemento;
-    aux->item = item;
+    aux->paciente = Paciente;
     aux->prox = NULL;
 
     if(filaVazia(fila)) {
@@ -48,35 +48,35 @@ void FilaPrioridade::insereItemPrimeiro(Fila* fila, Item item) {
     fila->tamanho++;
 }
 
-// Insere item apos outro item, usado na função insere com prioridade.
+// Insere Paciente apos outro Paciente, usado na função insere com prioridade.
 void FilaPrioridade::insereAposElemento(Apontador anterior, Apontador novo) {
     novo->prox = anterior->prox;
     anterior->prox = novo;
 }
 
-// Insere o item baseado em sua prioridade, prioridades menores são inseridas primeiro na fila.
-void FilaPrioridade::insereItemPrioridade(Fila* fila, Item item) {
-    // Se a fila estiver vazia insere o item direto no primeiro.
+// Insere o Paciente baseado em sua prioridade, prioridades menores são inseridas primeiro na fila.
+void FilaPrioridade::inserePacientePrioridade(Fila* fila, Paciente Paciente) {
+    // Se a fila estiver vazia insere o Paciente direto no primeiro.
     if(filaVazia(fila)) {
-        insereItemPrimeiro(fila, item);
+        inserePacientePrimeiro(fila, Paciente);
         return;
     }
 
-    // Se a prioridade do novo item for menor que a do primeiro, insere o item no começo da fila.
-    if(item.prioridade < fila->primeiro->item.prioridade) {
-        insereItemPrimeiro(fila, item);
+    // Se a prioridade do novo Paciente for menor que a do primeiro, insere o Paciente no começo da fila.
+    if(Paciente.prioridade < fila->primeiro->paciente.prioridade) {
+        inserePacientePrimeiro(fila, Paciente);
         return;
     }
 
     Apontador anterior = fila->primeiro;
     Apontador atual = anterior->prox;
     Apontador novo = new Elemento;
-    novo->item = item;
+    novo->paciente = Paciente;
     novo->prox = NULL;
 
     // Insere apos a maior prioridade encontrada, não funciona para o ultimo.
     while(atual != NULL) {
-        if(novo->item.prioridade < atual->item.prioridade) {
+        if(novo->paciente.prioridade < atual->paciente.prioridade) {
             insereAposElemento(anterior, novo);
             return;
         }
@@ -87,16 +87,16 @@ void FilaPrioridade::insereItemPrioridade(Fila* fila, Item item) {
     fila->ultimo = novo;
 }
 
-// Retira o primeiro item da fila e o retorna.
-FilaPrioridade::Item FilaPrioridade::retiraItem(Fila* fila) {
-    Item aux;
+// Retira o primeiro Paciente da fila e o retorna.
+FilaPrioridade::Paciente FilaPrioridade::retiraPaciente(Fila* fila) {
+    Paciente aux;
     aux.id = -1;
 
     if(filaVazia(fila)) {
         return aux;
     }
 
-    aux = fila->primeiro->item;
+    aux = fila->primeiro->paciente;
     Apontador deletado = fila->primeiro;
 
     fila->primeiro = fila->primeiro->prox;
@@ -121,10 +121,10 @@ void FilaPrioridade::esvaziaFila(Fila* fila) {
     fila->ultimo = fila->primeiro;
 }
 
-// Imprime o item recebido.
-void FilaPrioridade::imprimeItem(Item item) {
-    cout << "Id: " << item.id << endl;
-    cout << "Prioridade: " << item.prioridade << endl;
+// Imprime o Paciente recebido.
+void FilaPrioridade::imprimePaciente(Paciente Paciente) {
+    cout << "Id: " << Paciente.id << endl;
+    cout << "Prioridade: " << Paciente.prioridade << endl;
     cout << "---------------";
     cout << endl;
 }
@@ -133,7 +133,7 @@ void FilaPrioridade::imprimeItem(Item item) {
 void FilaPrioridade::imprimeFila(Fila* fila) {
     Apontador aux = fila->primeiro;
     while(aux != NULL) {
-        imprimeItem(aux->item);
+        imprimePaciente(aux->paciente);
         aux = aux->prox;
     }
 }
