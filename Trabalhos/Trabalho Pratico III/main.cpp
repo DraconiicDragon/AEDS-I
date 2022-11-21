@@ -4,31 +4,31 @@
 using namespace std;
 
 int main() {
-    Fila fila;
-    criaFilaVazia(&fila);
+    Upa hospital;
+    criaFilaVazia(&hospital.filaDePacientes);
+    cadastraMedicos(&hospital);
 
-    Paciente item;
-    item.id = 1;
-    item.prioridade = 2;
-    inserePacientePrioridade(&fila, item);
+    int opcaoMenu;
 
-    item.id = 2;
-    item.prioridade = 1;
-    inserePacientePrioridade(&fila, item);
-
-    item.id = 3;
-    item.prioridade = 2;
-    inserePacientePrioridade(&fila, item);
-
-    item.id = 4;
-    item.prioridade = 3;
-    inserePacientePrioridade(&fila, item);
-
-    item.id = 5;
-    item.prioridade = 4;
-    inserePacientePrioridade(&fila, item);
-
-    imprimeFila(&fila);
-
+    do {
+        imprimeMenu();
+        cin >> opcaoMenu;
+        switch(opcaoMenu) {
+            case 1:
+                novoAtendimento(&hospital);
+                break;
+            case 2:
+                imprimeFila(&hospital.filaDePacientes);
+                break;
+            case 3:
+                imprimeListaMedicos(hospital.medicos);
+                break;
+        }
+        system("cls");
+        atualizaMedicos(&hospital);
+        system("pause");
+        system("cls");
+    }while(opcaoMenu != 5);
+    cout << "Foram atendidos " << hospital.totalDePacientesAtendidos << " hoje.";
     return 0;
 }

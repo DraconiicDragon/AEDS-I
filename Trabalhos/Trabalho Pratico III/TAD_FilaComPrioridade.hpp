@@ -5,10 +5,8 @@ using namespace std;
 namespace FilaPrioridade {
 
 struct Triagem {
-    bool respostasVermelho[5];
-    bool respostasLaranja[5];
-    bool respostasAmarelo[5];
-    bool respostasVerde[3];
+    bool respostas[18];
+    int numSintomasNecessarios = 1;
 };
 
 struct Paciente {

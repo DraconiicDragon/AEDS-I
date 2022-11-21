@@ -1,16 +1,11 @@
 #include <iostream>
 #include <string.h>
-#include <fstream>
+#include <ctime>
 
 using namespace std;
 
 int main() {
-    ifstream arqEntrada("funcionarios.bin");
-    
-    char sus;
-    arqEntrada.get(sus);
-    arqEntrada >> sus;
-    cout << sus;
-
-    return 0;
+    time_t antes = clock();
+    system("pause");
+    cout << (clock() - antes)/CLOCKS_PER_SEC;
 }

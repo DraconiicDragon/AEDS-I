@@ -122,16 +122,26 @@ void FilaPrioridade::esvaziaFila(Fila* fila) {
 }
 
 // Imprime o Paciente recebido.
-void FilaPrioridade::imprimePaciente(Paciente Paciente) {
-    cout << "Id: " << Paciente.id << endl;
-    cout << "Prioridade: " << Paciente.prioridade << endl;
-    cout << "---------------";
+void FilaPrioridade::imprimePaciente(Paciente paciente) {
+    cout << "Id: " << paciente.id << endl;
+    cout << "Prioridade: " << paciente.prioridade << endl;
+    cout << "Nome: " << paciente.nome << endl;
+    cout << "Sexo: " << paciente.sexo << endl;
+    cout << "Endereco: " << paciente.endereco << endl;
+    cout << "-----------------------------";
     cout << endl;
 }
 
 // Imprime todos os itens da fila.
 void FilaPrioridade::imprimeFila(Fila* fila) {
     Apontador aux = fila->primeiro;
+    system("cls");
+    cout << "Fila de Pacientes em espera" << endl;
+    cout << "-----------------------------" << endl;
+    if(filaVazia(fila)) {
+        cout << "Sem pacientes em espera!" << endl;
+        return;
+    }
     while(aux != NULL) {
         imprimePaciente(aux->paciente);
         aux = aux->prox;

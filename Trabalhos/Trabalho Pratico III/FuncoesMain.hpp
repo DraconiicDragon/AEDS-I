@@ -1,6 +1,7 @@
 #include "TAD_FilaComPrioridade.cpp"
+#include <ctime>
 
-#define MAX_TAM 5
+#define MAX_MEDICOS 5
 
 using namespace FilaPrioridade;
 
@@ -9,17 +10,18 @@ struct Medico {
     string especialidade;
     string crm;
 
-    float comecoDoAtendimento;
+    time_t comecoDoAtendimento;
     float tempoDeAtendimento;
     Paciente pacienteAtendido;
     bool disponivel = true;
 };
 
 struct Upa {
-    Medico medicos[MAX_TAM];
-    int medicosDisponiveis = MAX_TAM;
-    int totalDePacientesAtendidos;
+    Medico medicos[MAX_MEDICOS];
+    int medicosDisponiveis = MAX_MEDICOS;
+    int totalDePacientesAtendidos = 0;
+
+    int idPacientes = 1;
 
     Fila filaDePacientes;
-
 };
