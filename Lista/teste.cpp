@@ -1,33 +1,36 @@
 #include <iostream>
-#include "./Duplamente Encadeada/TAD_ListaDuplamenteEncadeada.cpp"
+#include "./Circular Duplamente Encadeada/TAD_CircularDuplamenteEncadeada.cpp"
 
 
 using namespace std;
-using namespace listaDuplamenteEncadeada;
+using namespace circularDuplamenteEncadeada;
 
 int main() {
     Lista lista;
-    lista.criaListaVazia();
+    criaListaVazia(&lista);
     Item item;
     item.id = 2;
-    lista.insereItemUltimo(item);
+    insereItemUltimo(&lista, item);
 
     item.id = 4;
-    lista.insereItemUltimo(item);
+    insereItemUltimo(&lista, item);
 
     item.id = 3;
-    lista.insereItemAposElemento(item, 2);
+    insereItemAposElemento(&lista, item, 2);
 
     item.id = 1;
-    lista.insereItemPrimeiro(item);
+    insereItemPrimeiro(&lista, item);
 
-    lista.retiraItemPorId(2);
+    retiraItemPorId(&lista, 4);
     
     cout << endl << "Normal" << endl;
-    lista.imprimeLista();
+    imprimeLista(&lista);
 
     cout << endl << "Reverso" << endl;
-    lista.imprimeListaReversa();
+    imprimeListaReversa(&lista);
+
+    cout << endl << "Anterior do primeiro" << endl;
+    imprimeItem(lista.primeiro->ante->item);
 
     return 0;
 }
